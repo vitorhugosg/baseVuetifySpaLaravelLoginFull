@@ -1,7 +1,7 @@
 <template>
   <v-toolbar color="indigo" dark fixed app>
     <v-toolbar-side-icon @click.stop="setDrawer(drawer = !drawer)"></v-toolbar-side-icon>
-    <v-toolbar-title>Application</v-toolbar-title>
+    <v-toolbar-title>{{$route.name}}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-menu bottom left v-if="!usuario">
       <v-btn slot="activator" dark icon>
@@ -23,14 +23,20 @@
     </v-menu>
     <v-menu v-else v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x>
       <v-avatar slot="activator">
-        <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+        <img v-if="usuario.photo_url" :src="usuario.photo_url" alt="User">
+        <img v-else :src="require('@/assets/images/icons/SVG/pessoas.svg')" alt>
       </v-avatar>
 
       <v-card>
         <v-list>
           <v-list-tile avatar>
             <v-list-tile-avatar>
-              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+              <img v-if="usuario.photo_url" :src="usuario.photo_url" :alt="usuario.name">
+              <img
+                v-else
+                :src="require('@/assets/images/icons/SVG/pessoas.svg')"
+                :alt="usuario.name"
+              >
             </v-list-tile-avatar>
 
             <v-list-tile-content>
@@ -47,12 +53,18 @@
         </v-list>
 
         <v-card-actions>
-          <v-btn block color="error" @click="logOut()">
-            <v-icon>exit_to_app</v-icon>Sair
-          </v-btn>
-          <v-btn block color="primary" to="/usuaro/minhaconta">
-            <v-icon>account_circle</v-icon>Minha Conta
-          </v-btn>
+          <div class="row">
+            <div class="col-md-12 mb-1">
+              <v-btn block color="primary" @click="minhaConta">
+                <v-icon>account_circle</v-icon>Minha Conta
+              </v-btn>
+            </div>
+            <div class="col-md-12">
+              <v-btn block color="error" @click="logOut()">
+                <v-icon>exit_to_app</v-icon>Sair
+              </v-btn>
+            </div>
+          </div>
         </v-card-actions>
       </v-card>
     </v-menu>
@@ -81,7 +93,13 @@ export default {
     logOut() {
       this.$store.commit("SET_USUARIO", null);
       this.$router.push("/login");
+    },
+    minhaConta() {
+      this.$router.push("/minhaconta");
     }
+  },
+  mounted(){
+   
   },
   data() {
     return {

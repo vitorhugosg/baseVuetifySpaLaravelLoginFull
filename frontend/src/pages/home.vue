@@ -10,15 +10,17 @@
         </div>
       </div>
     </v-jumbotron>
-    <div class="row">
-      <div class="col-md-12 py-4"></div>
-    </div>
+    <blogFull></blogFull>
   </div>
 </template>
 
 <script>
+import blogFull from '@/components/sections/blog/blogfull'
 export default {
-  name: "App"
+  name: "App",
+  components:{
+    blogFull
+  }
 };
 </script>
 

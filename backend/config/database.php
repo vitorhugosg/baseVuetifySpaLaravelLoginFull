@@ -56,6 +56,18 @@ return [
             'engine' => null,
         ],
 
+        'wordpress' => [
+            'driver'    => 'mysql',
+            'host'      => env('WP_HOST', '127.0.0.1'),
+            'database'  => env('WP_DATABASE', 'wordpress_starter'),
+            'username'  => env('WP_USERNAME', 'root'),
+            'password'  => env('WP_PASSWORD', ''),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => env('WP_PREFIX', 'wp_'),
+            'strict'    => false,
+            'engine'    => null,
+        ],
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
