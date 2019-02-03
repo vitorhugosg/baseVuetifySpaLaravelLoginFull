@@ -5,7 +5,7 @@
         <form v-on:submit.prevent="resetarSenha" id="login">
           <v-card class="elevation-12 animated fadeInDown">
             <v-toolbar dark color="indigo">
-              <v-toolbar-title>Entrar com sua conta</v-toolbar-title>
+              <v-toolbar-title>Resetar senha</v-toolbar-title>
               <v-spacer></v-spacer>
             </v-toolbar>
             <v-card-text>

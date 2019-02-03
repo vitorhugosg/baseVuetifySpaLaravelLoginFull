@@ -1,11 +1,31 @@
 <template>
-    <v-container fluid fill-height>
+  <v-container fluid fill-height>
     <v-layout justify-center class="mt-5">
-      <v-flex xs12 sm6 md4 lg4 class="mt-5">
-        <form v-on:submit.prevent="login" id="resetarSenha">
+      <v-flex xs12 sm6 md4 lg4 class="mt-5" v-if="success">
+        <v-card class="elevation-12 animated fadeInDown">
+          <v-toolbar dark color="indigo">
+            <v-toolbar-title>Pedido realizado com sucesso!</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
+          <v-card-text>
+            <h3>{{success}}</h3>
+            <v-img
+              class="my-3"
+              max-height="150"
+              contain="true"
+              :src="require('@/assets/images/icons/SVG/email.svg')"
+            ></v-img>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn block type="submit" color="primary" dark to="/login">Login</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+      <v-flex xs12 sm6 md4 lg4 class="mt-5" v-else>
+        <form v-on:submit.prevent="esqueciSenha" id="resetarSenha">
           <v-card class="elevation-12 animated fadeInDown">
             <v-toolbar dark color="indigo">
-              <v-toolbar-title>Resetar Senha</v-toolbar-title>
+              <v-toolbar-title>Esqueci Senha</v-toolbar-title>
               <v-spacer></v-spacer>
             </v-toolbar>
             <v-card-text>
@@ -17,7 +37,6 @@
                 type="email"
                 required
               ></v-text-field>
-              
             </v-card-text>
             <v-card-actions>
               <v-btn
@@ -47,11 +66,12 @@ export default {
       errors: {
         form: ""
       },
-      loading: false
+      loading: false,
+      success: false
     };
   },
   methods: {
-    resetarSenha(e) {
+    esqueciSenha(e) {
       this.loading = true;
       let data = this.form;
       this.errors.form = "";
@@ -61,10 +81,10 @@ export default {
         }
       };
       this.axios
-        .post(sessionStorage.getItem("urlAPI") + "login", data, config)
+        .post(sessionStorage.getItem("urlAPI") + "createreset", data, config)
         .then(response => {
           if (response.data.status) {
-            console.log(response.data);
+            this.success = response.data.message;
           } else if (response.data.status == false && response.data.validacao) {
             let erros = "";
             for (let erro of Object.values(response.data.erros)) {
