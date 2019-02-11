@@ -1,5 +1,11 @@
 <template>
   <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12"  v-if="posts == 'loader'">
+              <v-progress-linear :indeterminate="true"></v-progress-linear>
+          </div>
+          
+      </div>
     <div class="row">
       <div class="col-md-12 text-center py-4" >
           <h2 class="font-weight-medium primary--text">Ultimas notícias do blog</h2>

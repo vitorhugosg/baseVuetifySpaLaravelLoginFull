@@ -9,6 +9,8 @@ use App\Post;
 class indexController extends Controller
 {
     public function index(Request $request){
-    	return Post::published()->status('publish')->paginate(8);
+        $data = true;
+        
+    	return Post::published()->status('publish')->paginate(10);
     }
 }
