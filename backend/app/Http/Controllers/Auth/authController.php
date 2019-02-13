@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\auth;
-use App\User;
-use App\Type_user;
+use App\Models\User\User;
+use App\Models\User\User_type;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\SignupActivate;
+
 class authController extends Controller
 {
 	public function login(Request $request){

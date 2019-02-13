@@ -20,7 +20,6 @@ Route::group(
 		'prefix' => 'blog'
 	],
 	function(){
-		Route::get('get', 'blog\indexController@index');
+		Route::get('get', 'blog\BlogController@index');
 		Route::get('gettwo', 'blog\indexController@two');
 	});
-
